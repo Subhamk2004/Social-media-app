@@ -26,8 +26,8 @@ const TabsLayout = () => {
                 tabBarShowLabel:false,
                 tabBarActiveTintColor:'#FFA001',
                 tabBarStyle: {
-                    backgroundColor:"#161622"
-
+                    backgroundColor:"#161622",
+                    borderColor:'#561921',
                 }
             }}
             >
