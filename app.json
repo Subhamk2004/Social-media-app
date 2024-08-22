@@ -14,7 +14,8 @@
     },
     "ios": {
       "supportsTablet": true,
-      "package": "com.skr.aora"
+      "package": "com.skr.aora",
+      "bundleIdentifier": "com.skr.aora"
     },
     "android": {
       "adaptiveIcon": {
