@@ -2,13 +2,13 @@
   "expo": {
     "name": "auraSocial",
     "slug": "auraSocial",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/logo-small.png",
-    "scheme": "auraSocial",
+    "scheme": "aurasocial",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/logo-small.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,7 +18,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/logo-small.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.skr.aora"
@@ -41,6 +41,12 @@
       "eas": {
         "projectId": "e504ff79-3ac7-4db7-aa6a-b0f411b1f584"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/e504ff79-3ac7-4db7-aa6a-b0f411b1f584"
     }
   }
 }
