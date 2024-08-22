@@ -4,7 +4,7 @@
     "slug": "auraSocial",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/logo-small.png",
     "scheme": "auraSocial",
     "userInterfaceStyle": "automatic",
     "splash": {
@@ -33,6 +33,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "e504ff79-3ac7-4db7-aa6a-b0f411b1f584"
+      }
     }
   }
 }
