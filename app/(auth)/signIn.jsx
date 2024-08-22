@@ -6,9 +6,11 @@ import { Image } from 'react-native'
 import FormField from '../../components/FormField'
 import CustomBtn from '../../components/CustomBtn.jsx'
 import { Link, router } from 'expo-router'
-import { logout, signIn } from '../../lib/appwrite.js'
+import { getCurrentUser, logout, signIn } from '../../lib/appwrite.js'
+import { useGlobalContext } from '../../context/GlobalProvider.js'
 
 const SignIn = () => {
+    const {setUser, setIsLoggedIn} = useGlobalContext();
     const [form, setForm] = useState({
         email: "",
         password: ""
@@ -28,7 +30,9 @@ const SignIn = () => {
         try {
           await signIn(form.email, form.password)
     
-          // set it to global state...
+          const result = await getCurrentUser();
+          setUser(result);
+          setIsLoggedIn(true);
     
           router.replace('/home')
     

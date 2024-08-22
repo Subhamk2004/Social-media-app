@@ -7,8 +7,10 @@ import FormField from '../../components/FormField'
 import CustomBtn from '../../components/CustomBtn.jsx'
 import { Link, router } from 'expo-router'
 import { createUser, logout } from '../../lib/appwrite.js'
+import { useGlobalContext } from '../../context/GlobalProvider.js'
 
 const SignUp = () => {
+  const {setUser, setIsLoggedIn} = useGlobalContext();
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -24,15 +26,16 @@ const SignUp = () => {
     }
 
     setIsSubmitting(true);
-    
+
 
     try {
       const result = await createUser(form.email, form.password, form.username)
 
-      // set it to global state...
+      setUser(result);
+      setIsLoggedIn(true);
 
       router.replace('/home')
-      
+
       // Navigates to the '/home' route: This is similar to redirecting the user to the homepage.
       // Updates the browser's URL: The address bar will show '/home'.
       // Prevents creating a new history entry: If the user presses the back button, they won't go back to the previous page.

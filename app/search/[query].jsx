@@ -1,19 +1,55 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, FlatList } from 'react-native'
+import React, { useEffect } from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import SearchInput from '../../components/SearchInput'
+import EmptyState from '../../components/EmptyState'
+import { searchPosts } from '../../lib/appwrite.js'
+import useAppwrite from '../../lib/useAppwrite.js'
+import VideoCard from '../../components/VideoCard.jsx'
+import { useLocalSearchParams } from 'expo-router'
 
 const Search = () => {
+  const { query } = useLocalSearchParams();
+  const { data: posts, isLoading, refetch } = useAppwrite(
+    () => searchPosts(query)
+  );
+
+  useEffect(() => {
+    refetch();
+  }, [query])
+
+
   return (
-    <View>
-      <Text>Search</Text>
-    </View>
+    <SafeAreaView className="bg-primary h-full">
+      <FlatList
+        data={posts}
+        // data={[]}
+        keyExtractor={(item) => item.$id}
+        renderItem={({ item }) => (
+          <VideoCard video={item} />
+        )}
+        ListHeaderComponent={() => (
+          <View className="my-6 px-4 ">
+            <Text className="font-pmedium text-sm text-gray-100" >
+              Search results
+            </Text>
+            <Text className="text-2xl font-psemibold text-white">
+              {query}
+            </Text>
+            <View className="mt-6 mb-8">
+              <SearchInput initialQuery={query} />
+            </View>
+          </View>
+        )}
+        ListEmptyComponent={() => (
+          <EmptyState
+            title="No videos available"
+            subtitle="No videos found for this search query"
+          />
+        )}
+      />
+    </SafeAreaView>
   )
 }
 
 export default Search
-
-// Parentheses () for folders:
-// Example: (tabs)
-// In Next.js, folders wrapped in parentheses are used to create route groups. These groups allow you to organize routes without affecting the URL path. They're useful for grouping related routes together or for creating layouts that apply to a subset of routes.
-// Square brackets [] for files:
-// Example: [search].jsx
-// Square brackets in file names are used for dynamic routes in Next.js. They indicate that this part of the route will be variable. For instance, [search].jsx could handle routes like /search/query1, /search/query2, etc.

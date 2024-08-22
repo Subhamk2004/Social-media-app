@@ -4,13 +4,14 @@ import * as Animatable from 'react-native-animatable';
 // * as Animatable
 // from react-native-animatable: This imports all functionalities from the react-native-animatable library, which allows you to add animations to your components.
 import { icons } from '../constants';
+import { Video, ResizeMode } from 'expo-av';
 
 const zoomIn = {
     0: {
         scale: 0.9
     },
     1: {
-        scale: 1,
+        scale: 1.1,
     }
 }
 
@@ -24,8 +25,9 @@ const zoomOut = {
 }
 
 const TrendingItem = ({ activeItem, item }) => {
+    
     const [play, setPlay] = useState(false);
-
+    const testVideoUrl = 'https://www.w3schools.com/html/mov_bbb.mp4';
     return (
         <Animatable.View
             className="mr-5"
@@ -33,9 +35,18 @@ const TrendingItem = ({ activeItem, item }) => {
             duration={500}
         >
             {play ? (
-                <Text className="text-white">
-                    PLaying
-                </Text>
+                <Video 
+                source={{uri: item.video}}
+                className="w-52 h-72 mt-3 bg-white/10 rounded-xl"
+                resizeMode={ResizeMode.CONTAIN}
+                useNativeControls
+                shouldPlay
+                onPlaybackStatusUpdate={(status) => {                    
+                    if(status.didJustFinish) {
+                        setPlay(false);
+                    }
+                }}
+                />
             ) : (
                 <TouchableOpacity className="relative justify-center items-center" activeOpacity={0.7} onPress={() => setPlay(true)} >
                     <ImageBackground
