@@ -43,6 +43,15 @@ const RootLayout = () => {
   ) // this automatically renders the current child route
   // this is like the Route.jsx of react native and the Slot is the outlet here
 
+  //BTW slot is not being used here you you can coonsider it as:
+  /*
+    return(
+      header
+      slot
+      footer
+    )
+  */
+
 }
 
 export default RootLayout
