@@ -122,3 +122,5 @@ now we will use memoizedValue in our component
 
 
 -> flatlist accepts data as an array just like .map in js, and renderItem as a function that returns the item to be rendered, and keyExtractor as a function that returns the key of the item
+
+-> Hot reloading is a feature that allows you to update your code in real-time without losing the state of your application. It is useful for quickly iterating on your code and seeing the changes immediately. It's very useful for developement
