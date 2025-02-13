@@ -1,4 +1,4 @@
-import { FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Horse, Heart, Cube, Users } from 'phosphor-react-native';
@@ -9,8 +9,11 @@ const test = () => {
   let [username, setUsername] = useState('Subhamk2004')
   let [userData, setUserData] = useState({})
   let [dummyUser, setDummyUser] = useState([]);
+  let [toggleTheme, setToggleTheme] = useState("light")
 
   const getUser = async () => {
+    if (toggleTheme === "light") setToggleTheme("dark")
+    else setToggleTheme("light")
     let res = await fetch(`https://api.github.com/users/${username}`)
     let data = await res.json();
     setUserData(data);
@@ -27,8 +30,8 @@ const test = () => {
 
 
   return (
-    <SafeAreaView style={styles.textF} className="bg-gray-300/80 p-8 ">
-      <View className="flex flex-row w-full p-3 rounded-3xl bg-white mb-5 justify-between">
+    <SafeAreaView style={styles.textF} className={toggleTheme === 'light' ? `bg-gray-300/80 p-8 ` : `bg-gray-900/90 p-8`}>
+      <View className={`flex flex-row w-full p-3 rounded-3xl  mb-5 justify-between ${toggleTheme === 'light' ? `bg-white` : `bg-primary border border-gray-300`}`}>
         <TextInput
           onChangeText={text => setUsername(text)}
           value={username}
@@ -40,18 +43,32 @@ const test = () => {
           onPress={getUser}
           className="p-2 bg-green-500 rounded-2xl"
         >
-          <Text className="text-base font-semibold text-white">
+          <Text className={`text-base font-semibold ${toggleTheme === 'light' ? 'text-white' : 'text-black'}`}>
             Get User
           </Text>
         </TouchableOpacity>
       </View>
-      <View className="bg-white w-full h-36 rounded-3xl p-4 shadow-xl shadow-gray-600 flex flex-row">
+      <View className={`${toggleTheme === 'light' ? 'bg-white shadow-gray-500' : 'bg-primary shadow-black'} w-full h-36 rounded-3xl p-4 shadow-xl  flex flex-row `}>
         <View className="flex flex-col justify-between h-full w-1/2">
-          <Text className="text-base font-semibold">
+          <Text className="text-base font-semibold"
+            style={toggleTheme === "light" ? {
+              color: 'black'
+            } :
+              {
+                color: 'white'
+              }}
+          >
             {userData?.name}
           </Text>
           <View className="">
-            <Text className="text-4xl font-semibold">
+            <Text className="text-4xl font-semibold"
+            style={toggleTheme === "light" ? {
+              color: 'black'
+            } :
+              {
+                color: 'white'
+              }}
+            >
               {userData?.public_repos}
             </Text>
             <Text className="text-gray-500">
@@ -95,16 +112,18 @@ const test = () => {
         dummyUser.length > 0 ?
           <FlatList
             // horizontal
-            className="mt-6 flex "
+            showsVerticalScrollIndicator={false}
+            className="mt-6 flex"
             data={dummyUser}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <UserDetails item={item} />
+              <UserDetails item={item} theme={toggleTheme} />
             )}
           />
           :
           null
       }
+      <ActivityIndicator />
     </SafeAreaView>
   )
 }

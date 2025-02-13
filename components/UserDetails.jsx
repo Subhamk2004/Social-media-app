@@ -1,16 +1,30 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const UserDetails = ({ item }) => {
+const UserDetails = ({ item, theme: toggleTheme }) => {
     return (
-        <View className="bg-white w-[300px] h-36 rounded-3xl p-4 shadow-xl mr-4">
+        <View className={`flex flex-row w-full p-3 rounded-3xl  mb-5 justify-between h-36 ${toggleTheme === 'light' ? `bg-white` : `bg-primary`}`}>
             <View className="flex flex-row justify-between h-full">
                 <View className="flex flex-col justify-between h-full w-1/2">
-                    <Text className="text-base font-semibold">
+                    <Text className="text-base font-semibold"
+                        style={toggleTheme === "light" ? {
+                            color: 'black'
+                        } :
+                            {
+                                color: 'white'
+                            }}
+                    >
                         {item.firstName}
                     </Text>
                     <View>
-                        <Text className="text-4xl font-semibold">
+                        <Text className="text-4xl font-semibold"
+                            style={toggleTheme === "light" ? {
+                                color: 'black'
+                            } :
+                                {
+                                    color: 'white'
+                                }}
+                        >
                             {item.height}
                         </Text>
                         <Text className="text-gray-500">

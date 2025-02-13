@@ -120,7 +120,23 @@ now we will use memoizedValue in our component
 
 -> React.memo is a higher-order component that memoizes a functional component’s output. It is similar to PureComponent for class components and is used to optimize performance by preventing unnecessary re-renders.
 
+-> stylesheet.create is also helpful in performance optimising as it does not create a new object every time the component renders, it only creates a new object when the styles change, while inline styles get's created every render
+
 
 -> flatlist accepts data as an array just like .map in js, and renderItem as a function that returns the item to be rendered, and keyExtractor as a function that returns the key of the item
 
 -> Hot reloading is a feature that allows you to update your code in real-time without losing the state of your application. It is useful for quickly iterating on your code and seeing the changes immediately. It's very useful for developement
+
+<Image
+      style={styles.image}
+      source={{ uri: 'https://example.com/myimage.jpg' }}  // Remote image
+      // source={require('./path/to/local/image.png')}  // Local image
+      resizeMode="cover"
+    />
+
+-> <ActivityIndicator> is a loading spinner that indicates ongoing background processes, such as data fetching. It is useful for providing feedback to users while waiting for content to load.
+    <ActivityIndicator size="large" color="#007AFF" />
+
+-> Pressable is a newer component that combines the functionality of TouchableOpacity, TouchableHighlight, and TouchableWithoutFeedback into a single component. It is more flexible and customizable than the other touchable components and is recommended for new projects.
+
+-> keyboardavoidingView is a component that automatically adjusts its height to avoid the keyboard when it appears. It is useful for preventing the keyboard from covering input fields and other interactive elements.
