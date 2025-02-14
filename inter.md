@@ -140,3 +140,10 @@ now we will use memoizedValue in our component
 -> Pressable is a newer component that combines the functionality of TouchableOpacity, TouchableHighlight, and TouchableWithoutFeedback into a single component. It is more flexible and customizable than the other touchable components and is recommended for new projects.
 
 -> keyboardavoidingView is a component that automatically adjusts its height to avoid the keyboard when it appears. It is useful for preventing the keyboard from covering input fields and other interactive elements.
+
+currying is turning f(a,b) -> f(a)(b);
+
+microtasks in js are the tasks that are executed after the current task is completed, ex: promise.then() is a microtask
+
+macrotasks are like setTimeOut etc and their priority is less than micro
+

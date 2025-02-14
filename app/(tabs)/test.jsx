@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Horse, Heart, Cube, Users } from 'phosphor-react-native';
 import UserDetails from '../../components/UserDetails';
-
+import Toast from 'react-native-toast-message'
 
 const test = () => {
   let [username, setUsername] = useState('Subhamk2004')
@@ -14,6 +14,11 @@ const test = () => {
   const getUser = async () => {
     if (toggleTheme === "light") setToggleTheme("dark")
     else setToggleTheme("light")
+    Toast.show({
+      type: 'success',
+      text1: 'Theme change',
+      text2: "Theme successfully changed"
+    })
     let res = await fetch(`https://api.github.com/users/${username}`)
     let data = await res.json();
     setUserData(data);
@@ -62,12 +67,12 @@ const test = () => {
           </Text>
           <View className="">
             <Text className="text-4xl font-semibold"
-            style={toggleTheme === "light" ? {
-              color: 'black'
-            } :
-              {
-                color: 'white'
-              }}
+              style={toggleTheme === "light" ? {
+                color: 'black'
+              } :
+                {
+                  color: 'white'
+                }}
             >
               {userData?.public_repos}
             </Text>
@@ -124,6 +129,7 @@ const test = () => {
           null
       }
       <ActivityIndicator />
+      <Toast />
     </SafeAreaView>
   )
 }
